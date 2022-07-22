@@ -19,13 +19,13 @@ data class TVShow(
     @ColumnInfo(name = "name")
     val name : String,
     @ColumnInfo(name = "start_date")
-    val start_date : String,
+    val start_date : String? = null,
     @ColumnInfo(name = "end_date")
-    val end_date : String,
+    val end_date : String? = null,
     @ColumnInfo(name = "network")
-    val network : String,
+    val network : String? = null,
     @ColumnInfo(name = "status")
-    val status : String,
+    val status : String? = null,
     @ColumnInfo(name = "image_thumbnail_path")
     val image_thumbnail_path : String,
 ){

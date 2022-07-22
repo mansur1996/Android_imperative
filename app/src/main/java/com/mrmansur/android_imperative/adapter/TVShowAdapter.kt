@@ -34,8 +34,10 @@ class TVShowAdapter(var activity: MainActivity, var items: ArrayList<TVShow>) : 
             holder.binding.tvType.text = tvShow.network
 
             ViewCompat.setTransitionName(holder.binding.ivMovie, tvShow.name)
-            //Click the tv show
             holder.binding.ivMovie.setOnClickListener {
+                //Save TVShow to Room
+                activity.viewModel.insertTVShowToDB(tvShow)
+                // Call Details Activity
                 activity.callDetailsActivity(tvShow, holder.binding.ivMovie)
             }
 

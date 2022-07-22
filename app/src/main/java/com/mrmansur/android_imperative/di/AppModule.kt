@@ -1,5 +1,9 @@
 package com.mrmansur.android_imperative.di
 
+import android.app.Application
+import android.content.Context
+import com.mrmansur.android_imperative.db.AppDatabase
+import com.mrmansur.android_imperative.db.TVShowDao
 import com.mrmansur.android_imperative.networking.Server.IS_TESTER
 import com.mrmansur.android_imperative.networking.Server.SERVER_DEVELOPMENT
 import com.mrmansur.android_imperative.networking.Server.SERVER_PRODUCTION
@@ -42,5 +46,17 @@ class AppModule {
     /**
      * Room Related
      */
+
+    @Provides
+    @Singleton
+    fun appDatabase(context: Application):AppDatabase{
+        return AppDatabase.getAppDBInstance(context)
+    }
+
+    @Provides
+    @Singleton
+    fun tvShowDao(appDatabase: AppDatabase) : TVShowDao{
+        return appDatabase.getTVShowDao()
+    }
 
 }

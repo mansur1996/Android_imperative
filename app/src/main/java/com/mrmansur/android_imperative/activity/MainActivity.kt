@@ -17,7 +17,7 @@ import com.mrmansur.android_imperative.utils.Logger
 
 class MainActivity : BaseActivity() {
     private val TAG = "MainActivity"
-    private val viewModel: MainViewModel by viewModels()
+    val viewModel: MainViewModel by viewModels()
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: TVShowAdapter
 

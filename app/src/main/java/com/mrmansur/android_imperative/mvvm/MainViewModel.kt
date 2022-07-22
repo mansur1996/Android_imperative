@@ -2,6 +2,7 @@ package com.mrmansur.android_imperative.mvvm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.mrmansur.android_imperative.model.TVShow
 import com.mrmansur.android_imperative.model.TVShowDetails
 import com.mrmansur.android_imperative.model.TVShowPopular
@@ -18,6 +19,8 @@ class MainViewModel @Inject constructor(private val tvShowRepository: TVShowRepo
     val isLoading = MutableLiveData<Boolean>()
     val errorMessage = MutableLiveData<String>()
     val tvShowsFromApi = MutableLiveData<ArrayList<TVShow>>()
+
+    val tvShowsFromDB = MutableLiveData<List<TVShow>>()
 
     val tvShowPopular = MutableLiveData<TVShowPopular>()
     val tvShowDetails = MutableLiveData<TVShowDetails>()
@@ -57,4 +60,23 @@ class MainViewModel @Inject constructor(private val tvShowRepository: TVShowRepo
     /**
      * Room Related
      */
+
+    fun getTVShowsFromDB(){
+        viewModelScope.launch {
+            val tvShows = tvShowRepository.getTVShowsFromDB()
+            tvShowsFromDB.postValue(tvShows)
+        }
+    }
+
+    fun insertTVShowToDB(tvShow: TVShow){
+        viewModelScope.launch {
+            tvShowRepository.insertTVShowToDB(tvShow)
+        }
+    }
+
+    fun deleteTvShowsFromDB(){
+        viewModelScope.launch {
+            tvShowRepository.deleteTvShowsFromDB()
+        }
+    }
 }
